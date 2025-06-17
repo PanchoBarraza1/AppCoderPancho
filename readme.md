@@ -1,81 +1,105 @@
-# ProyectoCoder
+# AppCoderPancho
 
-Este es un proyecto desarrollado con [Django](https://www.djangoproject.com/) para la cursada de CoderHouse.
+Este proyecto es una aplicación web desarrollada con Django siguiendo el patrón MVT (Modelo - Vista - Template). Simula una plataforma estilo blog/inventario, permitiendo gestionar productos, categorías y perfiles de usuario, además de incluir funcionalidad de búsqueda.
 
-## Requisitos
+## 🧩 Funcionalidades principales
 
-- Python 3.11 o superior
-- pip
+- ✅ Herencia de plantillas HTML usando `base.html`.
+- ✅ Modelo de al menos 3 clases (`Producto`, `CategoriaProducto`, `PerfilUsuario`).
+- ✅ Formularios para crear datos en cada uno de los modelos.
+- ✅ Formulario para buscar productos por nombre.
+- ✅ Sistema de login de usuarios.
+- ✅ Vista de configuración de perfil con personalización de color y foto.
 
-## Instalación
+---
 
-1. **Clonar el repositorio**
+## 📦 Modelos creados
 
-   ```sh
-   git clone <url-del-repo>
-   cd primeraApp
+1. **Producto**: nombre, descripción, precio, categoría, fecha de ingreso.
+2. **CategoriaProducto**: nombre, descripción.
+3. **PerfilUsuario**: usuario, nombre, apellido, email, foto de perfil, color de página, modo oscuro.
+
+---
+
+## 🧪 ¿Cómo probar el proyecto?
+
+1. **Clona el repositorio**  
+   ```bash
+   git clone https://github.com/PanchoBarraza1/AppCoderPancho.git
+   cd AppCoderPancho
    ```
 
-2. **Crear y activar un entorno virtual (opcional pero recomendado)**
-
-   ```sh
+2. **Crea y activa el entorno virtual**
+   ```bash
    python -m venv .venv
-   source .venv/bin/activate  # En Windows: .venv\Scripts\activate
+   source .venv/Scripts/activate  # En Windows
    ```
 
-3. **Instalar dependencias**
-
-   ```sh
+3. **Instala dependencias**
+   ```bash
    pip install -r requirements.txt
    ```
 
-## Configuración inicial
-
-1. **Aplicar migraciones**
-
-   ```sh
+4. **Aplica las migraciones**
+   ```bash
    python manage.py migrate
    ```
 
-2. **Crear un superusuario (opcional, para acceder al admin)**
-
-   ```sh
-   python manage.py createsuperuser
-   ```
-
-3. **Levantar el servidor de desarrollo**
-
-   ```sh
+5. **Inicia el servidor**
+   ```bash
    python manage.py runserver
    ```
 
-   El proyecto estará disponible en [http://127.0.0.1:8000/app/](http://127.0.0.1:8000/app/)
-
-## Estructura del proyecto
-
-- `AppCoder/`: Aplicación principal con modelos, vistas, formularios y urls.
-- `ProyectoCoder/`: Configuración global del proyecto Django.
-- `templates/`: Plantillas HTML.
-- `static/`: Archivos estáticos (CSS, JS, imágenes).
-- `requirements.txt`: Dependencias del proyecto.
-
-## Comandos útiles
-
-- Aplicar migraciones:  
-  `python manage.py migrate`
-- Crear nuevas migraciones:  
-  `python manage.py makemigrations`
-- Crear superusuario:  
-  `python manage.py createsuperuser`
-- Levantar el servidor:  
-  `python manage.py runserver`
-
-## Notas
-
-- Para agregar nuevas apps, usar:  
-  `python manage.py startapp nombre_app`
-- Para acceder al panel de administración:  
-  [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+6. **Accede a la app**
+   - Ir a `http://127.0.0.1:8000/`
 
 ---
-CoderHouse · Django · Python
+
+## 🚀 Funcionalidades clave
+
+| Sección                        | Ruta                                | Descripción                                       |
+|-------------------------------|-------------------------------------|--------------------------------------------------|
+| Home                          | `/`                                 | Página principal con menú                        |
+| Login                         | `/login/`                           | Iniciar sesión                                   |
+| Crear producto                | `/producto/crear/`                  | Formulario para agregar nuevos productos         |
+| Ver inventario                | `/inventario/`                      | Lista de productos con campo de búsqueda         |
+| Crear categoría               | `/categoria/crear/`                 | Crear nueva categoría de productos               |
+| Configuración de usuario      | `/configuracion/`                   | Cambiar nombre, color y foto de perfil           |
+
+---
+
+## 🧪 Usuario de prueba
+
+Puedes crear tu propio usuario desde el login, o usar uno de prueba si se configuró alguno manualmente en la base.
+
+---
+
+## 📁 Estructura destacada
+
+```
+AppCoder/
+├── models.py
+├── views.py
+├── forms.py
+├── urls.py
+├── templates/
+│   ├── base.html
+│   ├── home.html
+│   ├── inventario_list.html
+│   └── configuracion.html
+├── static/
+│   └── estilos.css
+```
+
+---
+
+## 📌 Notas
+
+- Este proyecto es parte de una entrega para el curso de Python con Django.
+- El nombre del repositorio sigue la convención: `AppCoderPancho`.
+
+---
+
+## 🌐 Autor
+
+Francisco Barraza – [GitHub](https://github.com/PanchoBarraza1)
