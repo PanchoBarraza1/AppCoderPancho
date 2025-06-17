@@ -1,14 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Estudiante, Profesor, Curso, Entregable
-
-admin.site.register(Estudiante)
-admin.site.register(Profesor)
-admin.site.register(Curso)
-admin.site.register(Entregable)
+from .models import Producto, Categoria
 
 
+admin.site.register(Producto)
+admin.site.register(Categoria)
 
 
 

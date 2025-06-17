@@ -1,110 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Inventario{% endblock %}</title>
     {% load static %}
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>{% block title %}App Coder{% endblock %}</title>
-    <!-- Favicon-->
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{% static 'AppCoder/assets/favicon.ico' %}"
-    />
-    <!-- Bootstrap icons-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Google fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static 'AppCoder/css/styles.css' %}" rel="stylesheet" />
-  </head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body class="{% if request.user.is_authenticated and request.user.perfil.modo_oscuro %}bg-dark text-white{% endif %}">
+  <nav class="navbar navbar-expand-lg navbar-{{ request.user.perfil.color_barra|default:"primary" }} bg-{{ request.user.perfil.color_barra|default:"primary" }}">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="{% url 'inicio' %}">Inventario</a>
 
-  <body>
-    <!-- Navigation-->
-    <nav class="navbar navbar-light bg-light static-top">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'inicio' %}">Coder House</a>
-        <div>
-          <a class="btn btn-outline-primary mx-1" href="{% url 'inicio' %}"
-            >Inicio</a
-          >
-          <a class="btn btn-outline-primary mx-1" href="{% url 'profesores' %}"
-            >Profesores</a
-          >
-          <a class="btn btn-outline-primary mx-1" href="{% url 'cursos' %}"
-            >Cursos</a
-          >
-          <a class="btn btn-outline-primary mx-1" href="{% url 'estudiantes' %}"
-            >Estudiantes</a
-          >
-          <a class="btn btn-outline-primary mx-1" href="{% url 'entregables' %}"
-            >Entregables</a
-          >
-        </div>
+      <!-- Botón menú móvil -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+
+          {% if request.user.is_authenticated %}
+            <li class="nav-item d-flex align-items-center me-3">
+              {% if request.user.perfil.foto %}
+                <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil"
+                     class="rounded-circle me-2" width="32" height="32">
+              {% endif %}
+              <span class="text-white">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'configuracion' %}">Configuración</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'logout' %}">Cerrar sesión</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <main>
-      {% block contenido %}
-      <!-- Contenido específico de cada página irá aquí -->
+  <hr>
+
+  <div class="container mt-4">
+      {% block content %}
       {% endblock %}
-    </main>
+  </div>
 
-    <!-- Footer-->
-    <footer class="footer bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><a href="#!">About</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">Contact</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">
-              &copy; Your Website 2023. All Rights Reserved.
-            </p>
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-              </li>
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="{% static 'AppCoder/js/scripts.js' %}"></script>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

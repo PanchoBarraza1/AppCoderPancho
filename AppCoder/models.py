@@ -1,21 +1,40 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Curso(models.Model):
-    nombre = models.CharField(max_length=100)  # Campo string de 100 caracteres
-    camada = models.IntegerField()  # Campo entero
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=50)
 
-class Estudiante(models.Model):
-    nombre = models.CharField(max_length=30)  # Campo string de 100 caracteres
-    apellido = models.CharField(max_length=30)  # Campo string de 100 caracteres
-    email = models.EmailField()  # Campo de email
+    def __str__(self):
+        return self.nombre
 
-class Profesor(models.Model):
-    nombre = models.CharField(max_length=30)  # Campo string de 30 caracteres
-    apellido = models.CharField(max_length=30)  # Campo string de 30 caracteres
-    email = models.EmailField()  # Campo de email
-    profesion = models.CharField(max_length=50)  # Campo string de 50 caracteres
+class Producto(models.Model):
+    nombre = models.CharField(max_length=100)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    descripcion = models.TextField(blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    precio = models.PositiveIntegerField()
 
-class Entregable(models.Model):
-    nombre = models.CharField(max_length=100)  # Campo string de 100 caracteres
-    fechaDeEntrega = models.DateField()  # Campo de fecha
-    entregado = models.BooleanField()  # Campo booleano
+    def __str__(self):
+        return self.nombre
+
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
+    foto = models.ImageField(upload_to='fotos_perfil/', null=True, blank=True)
+    color_barra = models.CharField(
+        max_length=20,
+        choices=[
+            ('primary', 'Azul'),
+            ('secondary', 'Gris'),
+            ('success', 'Verde'),
+            ('danger', 'Rojo'),
+            ('warning', 'Amarillo'),
+            ('info', 'Celeste')
+        ],
+        default='primary'
+    )
+    modo_oscuro = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Configuración de {self.user.username}"

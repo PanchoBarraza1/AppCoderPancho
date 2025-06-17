@@ -1,23 +1,11 @@
 from django.urls import path
-from .views import cursos , profesores, estudiantes, entregables, inicio,  cursoFormulario2, profesorFormulario, busquedaCamada, buscar
+from . import views
 
 urlpatterns = [
-    # path('estudiantes/', lista_estudiantes, name='lista_estudiantes'),
-    # path('estudiantes/<int:pk>/', detalle_estudiante, name='detalle_estudiante'),
-    path('', inicio, name='inicio'),
-    path('cursos/', cursoFormulario2, name='cursos'),
-    path('profesores/', profesores, name='profesores'),
-    path('estudiantes/', estudiantes, name='estudiantes'),
-    path('entregables/', entregables, name='entregables'),
-
-
-    path('profesorFormulario', profesorFormulario, name="profesorFormulario"),
-
-
-
-
-
-
-    # path('busquedaCamada', busquedaCamada, name="busquedaCamada"),
-    path('buscar/', buscar, name='buscar'),
+    path('', views.inventario_list, name='inicio'),
+    path('agregar/', views.producto_crear, name='agregar_producto'),
+    path('editar/<int:pk>/', views.producto_editar, name='editar_producto'),
+    path('eliminar/<int:pk>/', views.producto_eliminar, name='eliminar_producto'),
+    path('registro/', views.registro_usuario, name='registro'),
+    path('configuracion/', views.configuracion_usuario, name='configuracion'),
 ]

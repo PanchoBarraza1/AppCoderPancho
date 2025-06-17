@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Crear cuenta</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="border rounded p-4 bg-white shadow-sm">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <div class="form-text text-muted small">
+                                {{ field.help_text|safe }}
+                            </div>
+                        {% endif %}
+
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary w-100">Crear cuenta</button>
+            </form>
+            <p class="text-center mt-3">
+                ¿Ya tienes cuenta?
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            </p>
+        </div> <!-- cierre de col-md-6 -->
+    </div>     <!-- cierre de row -->
+</div>         <!-- cierre de container -->
+{% endblock %}

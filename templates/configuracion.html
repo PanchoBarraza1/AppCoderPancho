@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Configuración{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Configuración de perfil</h2>
+    <form method="post" enctype="multipart/form-data" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+{% endblock %}
