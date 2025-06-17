@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, PerfilUsuario
-from .forms import ProductoForm, RegistroForm, ConfiguracionForm
+from .models import Producto, PerfilUsuario, Categoria
+from .forms import ProductoForm, RegistroForm, ConfiguracionForm, CategoriaForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib import messages
+
+
+def home(request):
+    return render(request, 'home.html')
 
 @login_required
 def inventario_list(request):
@@ -19,6 +24,7 @@ def producto_crear(request):
             producto = form.save(commit=False)
             producto.usuario = request.user
             producto.save()
+            messages.success(request, '✅ Producto creado exitosamente.')
             return redirect('inventario_list')
     else:
         form = ProductoForm()
@@ -32,6 +38,7 @@ def producto_editar(request, pk):
         form = ProductoForm(request.POST, instance=producto)
         if form.is_valid():
             form.save()
+            messages.success(request, '✅ Producto actualizado correctamente.')
             return redirect('inventario_list')
     else:
         form = ProductoForm(instance=producto)
@@ -73,3 +80,20 @@ def configuracion_usuario(request):
         form = ConfiguracionForm(instance=perfil)
 
     return render(request, 'configuracion.html', {'form': form})
+
+@login_required
+def categoria_crear(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '✅ Categoría creada exitosamente.')
+            return redirect('inicio')  # Puedes redirigir donde prefieras
+    else:
+        form = CategoriaForm()
+    return render(request, 'categoria_form.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, '👋 Has cerrado sesión exitosamente.')
+    return redirect('inicio')

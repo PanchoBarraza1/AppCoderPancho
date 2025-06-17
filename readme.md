@@ -1,23 +1,27 @@
-# AppCoderPancho
+# TuPrimeraPaginaBarraza
 
-Este proyecto es una aplicación web desarrollada con Django siguiendo el patrón MVT (Modelo - Vista - Template). Simula una plataforma estilo blog/inventario, permitiendo gestionar productos, categorías y perfiles de usuario, además de incluir funcionalidad de búsqueda.
+Este proyecto es una aplicación web desarrollada con Django siguiendo el patrón MVT (Modelo - Vista - Template). Simula una plataforma estilo blog/inventario, permitiendo gestionar productos, categorías y perfiles de usuario, con funcionalidades como búsqueda, personalización de la experiencia, y gestión de sesión.
 
 ## 🧩 Funcionalidades principales
 
+- ✅ Home con mensaje de bienvenida personalizado.
 - ✅ Herencia de plantillas HTML usando `base.html`.
-- ✅ Modelo de al menos 3 clases (`Producto`, `CategoriaProducto`, `PerfilUsuario`).
-- ✅ Formularios para crear datos en cada uno de los modelos.
-- ✅ Formulario para buscar productos por nombre.
-- ✅ Sistema de login de usuarios.
-- ✅ Vista de configuración de perfil con personalización de color y foto.
+- ✅ Modelo de al menos 3 clases (`Producto`, `Categoria`, `PerfilUsuario`).
+- ✅ Formularios para crear y editar cada modelo.
+- ✅ CRUD completo de productos.
+- ✅ Formulario de búsqueda por nombre de producto.
+- ✅ Configuración de usuario con foto de perfil, colores y modo oscuro.
+- ✅ Validación de categorías duplicadas.
+- ✅ Mensajes de éxito para crear, editar, eliminar o cerrar sesión.
+- ✅ Login, registro y logout seguro con POST.
 
 ---
 
 ## 📦 Modelos creados
 
-1. **Producto**: nombre, descripción, precio, categoría, fecha de ingreso.
-2. **CategoriaProducto**: nombre, descripción.
-3. **PerfilUsuario**: usuario, nombre, apellido, email, foto de perfil, color de página, modo oscuro.
+1. **Producto**: nombre, descripción, precio, cantidad, categoría, usuario.
+2. **Categoria**: nombre (único).
+3. **PerfilUsuario**: usuario, nombre, apellido, email, color, modo oscuro, foto de perfil.
 
 ---
 
@@ -51,7 +55,8 @@ Este proyecto es una aplicación web desarrollada con Django siguiendo el patró
    ```
 
 6. **Accede a la app**
-   - Ir a `http://127.0.0.1:8000/`
+   - Home: `http://127.0.0.1:8000/`
+   - Inventario: `http://127.0.0.1:8000/inventario/`
 
 ---
 
@@ -59,18 +64,22 @@ Este proyecto es una aplicación web desarrollada con Django siguiendo el patró
 
 | Sección                        | Ruta                                | Descripción                                       |
 |-------------------------------|-------------------------------------|--------------------------------------------------|
-| Home                          | `/`                                 | Página principal con menú                        |
+| Home                          | `/`                                 | Página de bienvenida                             |
 | Login                         | `/login/`                           | Iniciar sesión                                   |
-| Crear producto                | `/producto/crear/`                  | Formulario para agregar nuevos productos         |
-| Ver inventario                | `/inventario/`                      | Lista de productos con campo de búsqueda         |
-| Crear categoría               | `/categoria/crear/`                 | Crear nueva categoría de productos               |
-| Configuración de usuario      | `/configuracion/`                   | Cambiar nombre, color y foto de perfil           |
+| Logout                        | `/logout/`                          | Cerrar sesión (requiere POST)                    |
+| Registro                      | `/registro/`                        | Crear nuevo usuario                              |
+| Inventario                    | `/inventario/`                      | Lista de productos del usuario                   |
+| Crear producto                | `/producto/crear/`                  | Formulario para agregar productos                |
+| Editar producto               | `/editar/<id>/`                     | Modificar un producto existente                  |
+| Eliminar producto             | `/eliminar/<id>/`                   | Eliminar un producto                             |
+| Crear categoría               | `/categoria/crear/`                 | Crear nuevas categorías                          |
+| Configuración de usuario      | `/configuracion/`                   | Personalizar colores, foto y preferencias        |
 
 ---
 
 ## 🧪 Usuario de prueba
 
-Puedes crear tu propio usuario desde el login, o usar uno de prueba si se configuró alguno manualmente en la base.
+Puedes registrarte con tu propio usuario desde `/registro/`.
 
 ---
 
@@ -86,9 +95,13 @@ AppCoder/
 │   ├── base.html
 │   ├── home.html
 │   ├── inventario_list.html
-│   └── configuracion.html
+│   ├── producto_form.html
+│   ├── categoria_form.html
 ├── static/
 │   └── estilos.css
+ProyectoCoder/
+├── settings.py
+├── urls.py
 ```
 
 ---
@@ -96,7 +109,7 @@ AppCoder/
 ## 📌 Notas
 
 - Este proyecto es parte de una entrega para el curso de Python con Django.
-- El nombre del repositorio sigue la convención: `AppCoderPancho`.
+- El nombre del repositorio sigue la convención: `TuPrimeraPaginaBarraza`.
 
 ---
 

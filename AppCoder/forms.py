@@ -1,5 +1,5 @@
 from django import forms
-from .models import Producto, PerfilUsuario
+from .models import Producto, PerfilUsuario, Categoria
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -41,11 +41,13 @@ class ConfiguracionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        user = kwargs.get('instance').user if kwargs.get('instance') else None
+        instance = kwargs.get('instance', None)
+        user = getattr(instance, 'user', None)
         if user:
             self.fields['first_name'].initial = user.first_name
             self.fields['last_name'].initial = user.last_name
             self.fields['email'].initial = user.email
+
 
     def save(self, commit=True):
         perfil = super().save(commit=False)
@@ -57,3 +59,11 @@ class ConfiguracionForm(forms.ModelForm):
             user.save()
             perfil.save()
         return perfil
+
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['nombre']
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+        }

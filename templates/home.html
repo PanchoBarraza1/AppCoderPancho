@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1>Bienvenido al Inventario de Productos</h1>
+    <p class="lead">Desde aquí puedes administrar tus productos y categorías.</p>
+    <a href="{% url 'inventario_list' %}" class="btn btn-primary btn-lg mt-3">Ir al inventario</a>
+</div>
+{% endblock %}
