@@ -1,10 +1,16 @@
-# Dependencias
-node_modules/
+# Entornos virtuales y entornos locales
+.venv/
 .env
-.venv
 
-# DB
+# Base de datos
 *.sqlite3
+
+# Archivos multimedia cargados por usuarios
+media/
+
+# Python
+__pycache__/
+*.pyc
 
 # Logs
 logs/
@@ -16,17 +22,18 @@ yarn-error.log*
 # Sistema operativo
 .DS_Store
 
-# Salidas de compilación
+# Build
 dist/
 build/
 
-# Archivos temporales
+# Temporales
 tmp/
 temp/
 *.tmp
 
-# Otros
+# IDEs
 .idea/
 .vscode/
+
+# Otros
 coverage/
-*__pycache__*

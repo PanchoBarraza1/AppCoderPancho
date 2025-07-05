@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{{ page.titulo }}</h1>
+  <h3>{{ page.subtitulo }}</h3>
+  <p>Publicado por {{ page.autor.username }} el {{ page.fecha_publicacion|date:"d/m/Y H:i" }}</p>
+
+  {% if page.imagen %}
+    <img src="{{ page.imagen.url }}" alt="Imagen" style="max-width: 400px;">
+  {% endif %}
+
+  <div>
+    {{ page.cuerpo|safe }}
+  </div>
+
+  {% if user == page.autor %}
+    <a href="{% url 'page-update' page.pk %}">Editar</a> |
+    <a href="{% url 'page-delete' page.pk %}">Eliminar</a>
+  {% endif %}
+
+  <br><a href="{% url 'page-list' %}">Volver al listado</a>
+{% endblock %}

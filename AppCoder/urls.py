@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import about_view
 
 urlpatterns = [
     path('', views.home, name='inicio'),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('configuracion/', views.configuracion_usuario, name='configuracion'),
     path('categoria/crear/', views.categoria_crear, name='crear_categoria'),
     path('logout/', views.logout_view, name='logout'),
+    path('about/', about_view, name='about'),
 ]

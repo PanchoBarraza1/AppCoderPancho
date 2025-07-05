@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Páginas publicadas</h1>
+
+  {% if pages %}
+    <ul>
+      {% for page in pages %}
+        <li>
+          <h2>{{ page.titulo }}</h2>
+          <p>{{ page.subtitulo }}</p>
+          <a href="{% url 'page-detail' page.pk %}">Leer más</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay páginas aún.</p>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    <a href="{% url 'page-create' %}">+ Crear nueva página</a>
+  {% endif %}
+{% endblock %}

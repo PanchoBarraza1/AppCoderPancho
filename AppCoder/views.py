@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.shortcuts import render
 
 
 def home(request):
@@ -97,3 +98,6 @@ def logout_view(request):
     logout(request)
     messages.success(request, '👋 Has cerrado sesión exitosamente.')
     return redirect('inicio')
+
+def about_view(request):
+    return render(request, 'about.html')

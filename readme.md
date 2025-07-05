@@ -62,7 +62,7 @@ Este proyecto es una aplicación web desarrollada con Django siguiendo el patró
 
 ## 🚀 Funcionalidades clave
 
-| Sección                        | Ruta                                | Descripción                                       |
+| Sección                        | Ruta                                | Descripción                                     |
 |-------------------------------|-------------------------------------|--------------------------------------------------|
 | Home                          | `/`                                 | Página de bienvenida                             |
 | Login                         | `/login/`                           | Iniciar sesión                                   |
@@ -74,8 +74,24 @@ Este proyecto es una aplicación web desarrollada con Django siguiendo el patró
 | Eliminar producto             | `/eliminar/<id>/`                   | Eliminar un producto                             |
 | Crear categoría               | `/categoria/crear/`                 | Crear nuevas categorías                          |
 | Configuración de usuario      | `/configuracion/`                   | Personalizar colores, foto y preferencias        |
+| Blog                          | `/pages/`                           | Lista de páginas (posts) públicas                |
+| Ver detalle del post          | `/pages/<id>/`                      | Ver contenido completo del post                  |
+| Crear nuevo post              | `/pages/crear/`                     | Solo para usuarios logueados                     |
+| Editar/Borrar post            | `/pages/<id>/editar/`               | Solo el autor puede hacerlo                      |
+| Acerca de mí                  | `/about/`                           | Página personal visible desde navbar             |
+| Bandeja de entrada            | `/mensajes/bandeja/`                | Ver mensajes recibidos                           |
+| Leer mensaje                  | `/mensajes/mensaje/<id>/`           | Marcar como leído al entrar                      |
+| Enviar mensaje                | `/mensajes/enviar/`                 | Buscar usuario, completar asunto y contenido     |
 
 ---
+
+## 🛠 Herramientas utilizadas
+
+- Django 5.x
+- Python 3.13
+- SQLite
+- CKEditor (para texto enriquecido en posts)
+- Bootstrap 5 (CDN)
 
 ## 🧪 Usuario de prueba
 

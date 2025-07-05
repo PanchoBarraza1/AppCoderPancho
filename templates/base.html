@@ -21,11 +21,22 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
 
+          <!-- Enlaces visibles para todos -->
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'page-list' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'about' %}">Acerca de mí</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'bandeja' %}">Mensajes</a>
+          </li>
+
           {% if request.user.is_authenticated %}
             <li class="nav-item d-flex align-items-center me-3">
               {% if request.user.perfil.foto %}
                 <img src="{{ request.user.perfil.foto.url }}" alt="Foto de perfil"
-                     class="rounded-circle me-2" width="32" height="32">
+                    class="rounded-circle me-2" width="32" height="32">
               {% endif %}
               <span class="text-white">{{ request.user.first_name }} {{ request.user.last_name }}</span>
             </li>
