@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Page(models.Model):
     titulo = models.CharField(max_length=200)
@@ -12,3 +13,6 @@ class Page(models.Model):
 
     def __str__(self):
         return f"{self.titulo} - {self.autor.username}"
+    
+    def get_absolute_url(self):
+        return reverse('page-detail', kwargs={'pk': self.pk})
